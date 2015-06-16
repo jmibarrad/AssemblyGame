@@ -1,5 +1,6 @@
 void printStringVideo(char* str, int color);
 void DrawLine(int x1,int y1,int x2,int y2,int color);
+void DrawRect(int x1,int y1,int x2,int y2,int color);
 
 void main(){
 	int i = 1, j = 50;
@@ -13,7 +14,7 @@ void main(){
 	
 	moveCursor(4, 1);
 	printStringVideo(game, 0x4);
-	DrawLine(20, 10, 100, 100, 0xF);
+	DrawRect(10, 10, 100, 100, 0xF);
 	while(1){
 		current = readChar();
 		if(current== 's'){
@@ -49,7 +50,7 @@ void DrawLine(int x1,int y1,int x2,int y2,int color)
 {
     int i,dx,dy,sdx,sdy,dxabs,dyabs,x,y,px,py;
 	dx=x2-x1;      /* the horizontal distance of the line */
-	  dy=y2-y1;      /* the vertical distance of the line */
+	dy=y2-y1;      /* the vertical distance of the line */
 	if(dx<0){  
 		dxabs=dx*-1;
 		sdx=-1;
@@ -100,3 +101,13 @@ void DrawLine(int x1,int y1,int x2,int y2,int color)
 		}
 	  }
 }
+
+void DrawRect(int x1,int y1,int x2,int y2,int color)
+{
+	DrawLine(x1,y1,x2,y1,color);
+	DrawLine(x2,y1,x2,y2,color);
+	DrawLine(x1,y1,x1,y2,color);
+	DrawLine(x1,y2,x2,y2,color);
+}
+
+
