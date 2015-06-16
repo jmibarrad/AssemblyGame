@@ -10,6 +10,7 @@ void main(){
 	game[1] = 'a';
 	game[2] = 0;  
 	setVideoMode();
+	
 	moveCursor(4, 1);
 	printStringVideo(game, 0x4);
 	DrawLine(20, 10, 100, 100, 0xF);
