@@ -3,12 +3,13 @@ void DrawLine(int x,int y,int x2,int y2,int color);
 void DrawRect(int x,int y,int x2,int y2,int color);
 void drawFillRect(int x,int y,int x2,int y2,int color);
 void gameOver();
+void gameStart();
 void drawMaze();
 void printInt(int value, int color);
 
 void main(){
-	int i = 32, j = 120, pixel = 0;
-	char current = 0;
+	int i = 32, j = 120;
+	
 	char* gameLabel = "EMA Games";
 	beep();
 	setVideoMode();
@@ -21,39 +22,76 @@ void main(){
 	printInt(getPixel(0, 0), 15);
 	printInt(12, 15);
 	//gameOver();
+	
+	gameStart();
+}
+
+void gameStart()
+{
+	int i = 32, j = 120, pixel = 0,pixel2=0;
+	char current = 0;
+	putPixel(i, j, 0xF);
+	putPixel(i+1, j, 0xF);
+	putPixel(i, j+1, 0xF);
+	putPixel(i+1, j+1, 0xF);
 	while(1){
 		current = readChar();
 		if(current== 's'){
 			i++;
-			pixel = getPixel(i, j);
-			if(pixel != 0x0)
+			pixel = getPixel(i, j+1);
+			pixel2 = getPixel(i+1, j+1);
+			if(pixel != 0x0 && pixel2 !=0x0)
 				gameOver();
 			putPixel(i-1, j, 0x0);
+			putPixel(i-1, j+1, 0x0);
+			
 			putPixel(i, j, 0xF);
+			putPixel(i+1, j, 0xF);
+			putPixel(i, j+1, 0xF);
+			putPixel(i+1, j+1, 0xF);
 		}else if(current == 'w'){
 			i--;
 			pixel = getPixel(i, j);
-			if(pixel != 0x0)
+			pixel2 = getPixel(i+1, j);
+			if(pixel != 0x0 && pixel2!=0x0)
 				gameOver();
-			putPixel(i+1, j, 0x0);
+			putPixel(i+2, j, 0x0);
+			putPixel(i+2, j+1, 0x0);
+			
 			putPixel(i, j, 0xF);
+			putPixel(i+1, j, 0xF);
+			putPixel(i, j+1, 0xF);
+			putPixel(i+1, j+1, 0xF);
 		}else if(current== 'd'){
 			j++;
-			pixel = getPixel(i, j);
-			if(pixel != 0x0)
+			pixel = getPixel(i+1, j);
+			pixel2 = getPixel(i+1, j+1);
+			if(pixel != 0x0 && pixel2!=0x0)
 				gameOver();
 			putPixel(i, j-1, 0x0);
+			putPixel(i+1, j-1, 0x0);
+			
 			putPixel(i, j, 0xF);
+			putPixel(i+1, j, 0xF);
+			putPixel(i, j+1, 0xF);
+			putPixel(i+1, j+1, 0xF);
 		}else if(current == 'a'){
 			j--;
 			pixel = getPixel(i, j);
-			if(pixel != 0x0)
+			pixel2 = getPixel(i, j+1);
+			if(pixel != 0x0 && pixel !=0x0)
 				gameOver();
-			putPixel(i, j+1, 0x0);
-			putPixel(i, j, 0xf);
+			putPixel(i, j+2, 0x0);
+			putPixel(i+1, j+2, 0x0);
+			
+			putPixel(i, j, 0xF);
+			putPixel(i+1, j, 0xF);
+			putPixel(i, j+1, 0xF);
+			putPixel(i+1, j+1, 0xF);
 		}
 	}
 }
+
 
 void movingObstacules(){
 
