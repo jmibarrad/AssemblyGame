@@ -16,8 +16,9 @@ void main(){
 	printStringVideo("EMA", 0x4F);
 	printStringVideo(" Games", 0x5F);
 	drawMaze(0xF);
+	putPixel(0,0,12);
 	printInt(getPixel(i+1, j), 15);
-	printInt(getPixel(27, 40), 15);
+	printInt(getPixel(0, 0), 15);
 	printInt(12, 15);
 	//gameOver();
 	while(1){
@@ -31,14 +32,23 @@ void main(){
 			putPixel(i, j, 0xF);
 		}else if(current == 'w'){
 			i--;
+			pixel = getPixel(i, j);
+			if(pixel != 0x0)
+				gameOver();
 			putPixel(i+1, j, 0x0);
 			putPixel(i, j, 0xF);
 		}else if(current== 'd'){
 			j++;
+			pixel = getPixel(i, j);
+			if(pixel != 0x0)
+				gameOver();
 			putPixel(i, j-1, 0x0);
 			putPixel(i, j, 0xF);
 		}else if(current == 'a'){
 			j--;
+			pixel = getPixel(i, j);
+			if(pixel != 0x0)
+				gameOver();
 			putPixel(i, j+1, 0x0);
 			putPixel(i, j, 0xf);
 		}
@@ -151,16 +161,19 @@ void drawMaze(int color){
 
 void printInt(int value,int color)
 {
-	int digits=1;
-	while(value>=digits)
-		digits=digits*10;
+	if(value!=0){
+		int digits=1;
+		while(value>=digits)
+			digits=digits*10;
 		
-	digits=digits/10;
-	while(digits!=1)
-	{
-		printCharVGA((value/digits)+48,color);
-		value=value-(value/digits)*digits;
 		digits=digits/10;
-	}
-	printCharVGA((value/digits)+48,color);
+		while(digits!=1)
+		{
+			printCharVGA((value/digits)+48,color);
+			value=value-(value/digits)*digits;
+			digits=digits/10;
+		}
+		printCharVGA((value/digits)+48,color);
+	}else
+		printCharVGA(value+48,color);
 }

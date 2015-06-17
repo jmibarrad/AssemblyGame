@@ -57,16 +57,18 @@ _setVideoMode:
 	mov al, #0x13
 	int #0x10
 	ret
-	
+
+;int getPixel(int x,int y);
 _getPixel:
 	push bp
 	mov bp, sp
-	mov ah, #0xD
-	mov bh, #0
-	mov cx, [bp+4]
-	mov dx, [bp+6]
-	xor al, al
+	mov ah, #0x0D
+	mov cx, [bp+6]
+	mov dx, [bp+4]
 	int #0x10
+	mov bl,al
+	xor ax,ax
+	mov al,bl
 	pop bp
 	ret
 
