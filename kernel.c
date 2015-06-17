@@ -5,6 +5,7 @@ void drawFillRect(int x,int y,int x2,int y2,int color);
 void gameOver();
 void drawMaze();
 void printInt(int value, int color);
+void gameStart(int color);
 
 void main(){
 	int i = 32, j = 120, pixel = 0;
@@ -16,37 +17,74 @@ void main(){
 	printStringVideo("EMA", 0x4F);
 	printStringVideo(" Games", 0x5F);
 	drawMaze(0xF);
-	printInt(getPixel(i+1, j), 15);
-	printInt(getPixel(27, 40), 15);
-	printInt(12, 15);
-	//gameOver();
+
+	gameStart(0x3);
+}
+
+void gameStart(int color)
+{
+	int i = 32, j = 120, pixel = 0,pixel2=0;
+	char current = 0;
+	putPixel(i, j, color);
+	putPixel(i+1, j, color);
+	putPixel(i, j+1, color);
+	putPixel(i+1, j+1, color);
 	while(1){
 		current = readChar();
 		if(current== 's'){
 			i++;
-			pixel = getPixel(i, j);
-			if(pixel != 0x0)
+			pixel = getPixel(i, j+1);
+			pixel2 = getPixel(i+1, j+1);
+			if(pixel != 0x0 && pixel2 !=0x0)
 				gameOver();
 			putPixel(i-1, j, 0x0);
-			putPixel(i, j, 0xF);
+			putPixel(i-1, j+1, 0x0);
+			
+			putPixel(i, j, color);
+			putPixel(i+1, j, color);
+			putPixel(i, j+1, color);
+			putPixel(i+1, j+1, color);
 		}else if(current == 'w'){
 			i--;
-			putPixel(i+1, j, 0x0);
-			putPixel(i, j, 0xF);
+			pixel = getPixel(i, j);
+			pixel2 = getPixel(i+1, j);
+			if(pixel != 0x0 && pixel2!=0x0)
+				gameOver();
+			putPixel(i+2, j, 0x0);
+			putPixel(i+2, j+1, 0x0);
+			
+			putPixel(i, j, color);
+			putPixel(i+1, j, color);
+			putPixel(i, j+1, color);
+			putPixel(i+1, j+1, color);
 		}else if(current== 'd'){
 			j++;
+			pixel = getPixel(i+1, j);
+			pixel2 = getPixel(i+1, j+1);
+			if(pixel != 0x0 && pixel2!=0x0)
+				gameOver();
 			putPixel(i, j-1, 0x0);
-			putPixel(i, j, 0xF);
+			putPixel(i+1, j-1, 0x0);
+			
+			putPixel(i, j, color);
+			putPixel(i+1, j, color);
+			putPixel(i, j+1, color);
+			putPixel(i+1, j+1, color);
 		}else if(current == 'a'){
 			j--;
-			putPixel(i, j+1, 0x0);
-			putPixel(i, j, 0xf);
+			pixel = getPixel(i, j);
+			pixel2 = getPixel(i, j+1);
+			if(pixel != 0x0 && pixel !=0x0)
+				gameOver();
+			putPixel(i, j+2, 0x0);
+			putPixel(i+1, j+2, 0x0);
+			
+			putPixel(i, j, color);
+			putPixel(i+1, j, color);
+			putPixel(i, j+1, color);
+			putPixel(i+1, j+1, color);
 		}
 	}
-}
-
-void movingObstacules(){
-
 }
 
 void printStringVideo(char* str, int color){
@@ -134,20 +172,41 @@ void drawFillRect(int x, int y, int width, int height, int color){
 }
 
 void drawMaze(int color){
-	int width = 5;
+	int width = 5, i = 44, j = 0;
 	DrawRect(27, 40, 185, 279, 0xE);
 	//           x1  y1 width height color
 	drawFillRect(28, 52, 22, width, color);
 	drawFillRect(50, 52, width, 50, color);	
-	drawFillRect(38, 44, width, width, color);
+	drawFillRect(36, 47, width, width, color);
 	drawFillRect(28, 64, 11,width, color);
-	//drawFillRect(80, 45, 83, 67, 0xF);
-	//drawFillRect(100, 41, 103, 80, 0xF);
-	//drawFillRect(28, 80, 50, 83, 0xF);
-	//drawFillRect(50, 35, 53, 100, 0xF);
-	//drawFillRect(80, 4, 83, 45, 0xF);
-	
+	drawFillRect(39, 64, width, 15, color);
+	drawFillRect(28, 140, 12, width, color);
+	drawFillRect(39, 126, width, 19, color);
+	drawFillRect(39, 90, width, 27, color);
+	drawFillRect(44, 112, 30, width, color);
+	drawFillRect(28, 145, 3, width, 0xA); //Start
+	drawFillRect(28, 150, 30, width, color);
+	drawFillRect(50, 140, width, 15, color);
+	drawFillRect(50, 117, width, 16, color);
+	drawFillRect(35, 170, 20, width, color);
+	drawFillRect(70, 45, width, 62, color);
+	drawFillRect(70, 130, width, 68, color);
+	drawFillRect(70, 210, width, 65, color);
+	for( ; j < 16; i+=15, j++)
+		drawFillRect(80, i, 30, width, color);
+	drawFillRect(110, 41, width, 113, color);
+	drawFillRect(110, 164, width, 116, color);	
+	drawFillRect(35, 197, 40, width, color);
+	drawFillRect(35, 202, width, 71, color);
+	drawFillRect(37, 268, 10, width, color);	
+	drawFillRect(50, 259, 20, width, color);
+	drawFillRect(50, 228, width, 31, color);
+	drawFillRect(50, 210, width, 11, color);
+	drawFillRect(60, 200, width, 9, color);
+	drawFillRect(60, 217, width, 35, color);
+	//drawFillRect(60, 217, width, 35, color);
 }
+
 
 void printInt(int value,int color)
 {
