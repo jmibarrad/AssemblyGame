@@ -20,21 +20,23 @@ void main(){
 	//beep();
 	setVideoMode();
 	moveCursor(15, 1);
+	DrawRect(27, 40, 185, 279, 0xE);
 	printStringVideo("EMA", 0x4F);
 	printStringVideo(" Games", 0x5F);
-	drawMaze(11);
+	
 	printInt(getPixel(i+1, j), 15);
 	printInt(getPixel(0, 0), 15);
 	printInt(12, 15);
 	//gameOver();
-	
-	runnerGame();
+	gameStart();
+	//runnerGame();
 }
 
 void gameStart()
 {
 	int i = 32, j = 105, pixel = 0,pixel2=0;
 	char current = 0;
+	drawMaze(11);
 	putPixel(i, j, 0xF);
 	putPixel(i+1, j, 0xF);
 	putPixel(i, j+1, 0xF);
@@ -316,18 +318,12 @@ void drawFillRect(int x, int y, int width, int height, int color){
 
 void drawMaze(int color){
 	int width = 5;
-	DrawRect(27, 40, 185, 279, 0xE);
-	//           x1  y1 width height color
-	drawFillRect(50, 41, width, 38, color);
-	//drawFillRect(50, 52, width, 50, color);	
-	//drawFillRect(38, 44, width, width, color);
-	//drawFillRect(28, 64, 11,width, color);
-	//drawFillRect(80, 45, 83, 67, 0xF);
-	//drawFillRect(100, 41, 103, 80, 0xF);
-	//drawFillRect(28, 80, 50, 83, 0xF);
-	//drawFillRect(50, 35, 53, 100, 0xF);
-	//drawFillRect(80, 4, 83, 45, 0xF);
-	
+
+	//           y1  x1 width height color
+	drawFillRect(45, 61, width, 218, color);
+	drawFillRect(45, 61, 20, width, color);
+	drawFillRect(75, 61, width, 15, color);
+	drawFillRect(65, 71,15, width, color);
 }
 
 void printInt(int value,int color)
