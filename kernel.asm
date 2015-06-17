@@ -15,7 +15,16 @@
 	.global _printCharVGA
 	.global _showCursor
 	.global _beep
+	.global _delay
 	
+	
+_delay:
+	mov BX, #100
+	loop1: mov cx,#10000 
+	loop2: loop loop2 
+	dec BX 
+	jnz loop1
+
 _beep:
 	mov bx, #0x1000
 	mov al, #182         ; Prepare the speaker for the
