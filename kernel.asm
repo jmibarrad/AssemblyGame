@@ -10,13 +10,14 @@
 	.global _scrollUp
 	.global _mod
 	.global _setVideoMode
+	.global _getPixel
 	.global _putPixel
 	.global _printCharVGA
 	.global _showCursor
 	.global _beep
 	
 _beep:
-	mov bx, #0x1
+	mov bx, #0x1000
 	mov al, #182         ; Prepare the speaker for the
 	out #0x43, al     ;  note.
 	mov ax, bx    ; Frequency number (in decimal)
@@ -26,7 +27,7 @@ _beep:
 	in al, #0x61     ; Turn on note (get value from
 	or al, #3  ; Set bits 1 and 0.
 	out #0x61, al         ; Send new value.
-	;mov     bx, #4       ; Pause for duration of note.
+	mov bx, #4       ; Pause for duration of note.
 	mov cx, #200
 	delay:
 	loop delay
@@ -55,6 +56,18 @@ _setVideoMode:
 	mov ah, #0x00
 	mov al, #0x13
 	int #0x10
+	ret
+	
+_getPixel:
+	push bp
+	mov bp, sp
+	mov ah, #0xD
+	mov bh, #0
+	mov cx, [bp+4]
+	mov dx, [bp+6]
+	xor al, al
+	int #0x10
+	pop bp
 	ret
 
 _putPixel:

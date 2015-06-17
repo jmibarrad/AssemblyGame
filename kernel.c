@@ -4,10 +4,10 @@ void DrawRect(int x,int y,int x2,int y2,int color);
 void drawFillRect(int x,int y,int x2,int y2,int color);
 void gameOver();
 void drawMaze();
-
+void printInt(int value, int color);
 
 void main(){
-	int i = 1, j = 50;
+	int i = 32, j = 120, pixel = 0;
 	char current = 0;
 	char* gameLabel = "EMA Games";
 	beep();
@@ -15,12 +15,18 @@ void main(){
 	moveCursor(15, 1);
 	printStringVideo("EMA", 0x4F);
 	printStringVideo(" Games", 0x5F);
-	drawMaze();
+	drawMaze(0xF);
+	printInt(getPixel(i+1, j), 15);
+	printInt(getPixel(27, 40), 15);
+	printInt(12, 15);
 	//gameOver();
 	while(1){
 		current = readChar();
 		if(current== 's'){
 			i++;
+			pixel = getPixel(i, j);
+			if(pixel != 0x0)
+				gameOver();
 			putPixel(i-1, j, 0x0);
 			putPixel(i, j, 0xF);
 		}else if(current == 'w'){
@@ -105,7 +111,7 @@ void DrawLine(int x1,int y1,int x2,int y2,int color)
 	  }
 }
 
-void DrawRect(int x1,int y1,int x2,int y2,int color)
+void DrawRect(int x1,int y1 ,int x2 ,int y2,int color)
 {
 	DrawLine(x1,y1,x2,y1,color);
 	DrawLine(x2,y1,x2,y2,color);
@@ -120,23 +126,41 @@ void gameOver(){
 			DrawRect(i, j, k, h, 0x4);
 }
 
-void drawFillRect(int x, int y, int x2, int y2, int color){
+void drawFillRect(int x, int y, int width, int height, int color){
 	int i, j;
-	for(i = x; i<x2; i++)
-		for(j = y; j < y2; j++)
+	for(i = x; i<x + width; i++)
+		for(j = y; j < y + height; j++)
 			putPixel(i, j, color);
 }
 
-void drawMaze(){
-	//           x1  y1 x2  y2
+void drawMaze(int color){
+	int width = 5;
 	DrawRect(27, 40, 185, 279, 0xE);
-	drawFillRect(28, 47, 50, 50, 0xF);
-	drawFillRect(50, 47, 53, 60, 0xF);
-	//drawFillRect(60, 41, 63, 100, 0xF);
+	//           x1  y1 width height color
+	drawFillRect(28, 52, 22, width, color);
+	drawFillRect(50, 52, width, 50, color);	
+	drawFillRect(38, 44, width, width, color);
+	drawFillRect(28, 64, 11,width, color);
 	//drawFillRect(80, 45, 83, 67, 0xF);
 	//drawFillRect(100, 41, 103, 80, 0xF);
 	//drawFillRect(28, 80, 50, 83, 0xF);
 	//drawFillRect(50, 35, 53, 100, 0xF);
 	//drawFillRect(80, 4, 83, 45, 0xF);
 	
+}
+
+void printInt(int value,int color)
+{
+	int digits=1;
+	while(value>=digits)
+		digits=digits*10;
+		
+	digits=digits/10;
+	while(digits!=1)
+	{
+		printCharVGA((value/digits)+48,color);
+		value=value-(value/digits)*digits;
+		digits=digits/10;
+	}
+	printCharVGA((value/digits)+48,color);
 }
