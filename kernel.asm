@@ -13,6 +13,27 @@
 	.global _putPixel
 	.global _printCharVGA
 	.global _showCursor
+	.global _beep
+	
+_beep:
+	mov bx, #0x1
+	mov al, #182         ; Prepare the speaker for the
+	out #0x43, al     ;  note.
+	mov ax, bx    ; Frequency number (in decimal)
+	out #0x42, al     ; Output low byte.
+	mov al, ah      ; Output high byte.
+	out #0x42, al 
+	in al, #0x61     ; Turn on note (get value from
+	or al, #3  ; Set bits 1 and 0.
+	out #0x61, al         ; Send new value.
+	;mov     bx, #4       ; Pause for duration of note.
+	mov cx, #200
+	delay:
+	loop delay
+	in al, #0x61
+	and al, #0xFC
+	out #0x61, al
+	ret
 
 _showCursor:
 	mov ax, #0x01
