@@ -6,6 +6,8 @@ void gameOver();
 void drawMaze();
 void printInt(int value, int color);
 void gameStart(int color);
+void clearScreen();
+int gameStatus = 1;
 
 void main(){
 	int i = 32, j = 120, pixel = 0;
@@ -19,6 +21,8 @@ void main(){
 	drawMaze(0xF);
 
 	gameStart(0x3);
+	clearScreen();
+
 }
 
 void gameStart(int color)
@@ -29,7 +33,7 @@ void gameStart(int color)
 	putPixel(i+1, j, color);
 	putPixel(i, j+1, color);
 	putPixel(i+1, j+1, color);
-	while(1){
+	while(gameStatus){
 		current = readChar();
 		if(current== 's'){
 			i++;
@@ -113,6 +117,13 @@ void printStringVideo(char* str, int color){
 		printCharVGA(str[i], color);
 }
 
+void clearScreen(){
+	int i, j, k = 199, h = 319;
+	for(i = 0; i < 200; i++, k--)
+		for(j = 0; j < 320; j++, h--)
+			DrawRect(i, j, k, h, 0x00);
+}
+
 void DrawLine(int x1,int y1,int x2,int y2,int color)
 {
     int i,dx,dy,sdx,sdy,dxabs,dyabs,x,y,px,py;
@@ -182,7 +193,10 @@ void gameOver(){
 	for(i = 0; i < 200; i++, k--)
 		for(j = 0; j < 320; j++, h--)
 			DrawRect(i, j, k, h, 0x4);
+	gameStatus = 0;
 }
+
+
 
 void drawFillRect(int x, int y, int width, int height, int color){
 	int i, j;
@@ -262,6 +276,7 @@ void drawMaze(int color){
 	drawFillRect(155, 90, width, 100, color);
 	drawFillRect(170, 90, width, 70, color);
 
+	drawFillRect(115, 90, 9, 1, color);
 	drawFillRect(130, 90, 10, width, color);
 	drawFillRect(130, 95, 10, width, 0xD);
 
@@ -276,6 +291,22 @@ void drawMaze(int color){
 	drawFillRect(137, 245, 18, width, color);
 	drawFillRect(148, 256, width, 15, color);
 	drawFillRect(156, 256, width, 15, color);
+
+	drawFillRect(170, 170, 1, 7, color);
+	drawFillRect(165, 175, 1, 7, color);
+
+	//dots protecting end
+	drawFillRect(170, 270, 2, 2, color);
+	drawFillRect(170, 274, 2, 2, color);
+	drawFillRect(172, 275, 2, 2, color);
+	drawFillRect(172, 277, 2, 2, 0x5);
+	drawFillRect(174, 268, 2, 2, color);
+	drawFillRect(172, 266, 2, 2, color);
+	drawFillRect(178, 266, 2, 2, color);
+	drawFillRect(176, 264, 2, 2, color);
+	drawFillRect(172, 271, 2, 2, color);
+	drawFillRect(182, 263, 2, 2, color);
+	drawFillRect(180, 262, 2, 2, color);
 
 	drawFillRect(179, 270, width, 8, 4); // End
 	

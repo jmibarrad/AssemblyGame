@@ -112,26 +112,14 @@ _readChar:
 	ret
 
 _clrScreen:
-	mov ah,#6    
-        mov al,#0
-        mov bh,#7
-        mov cx,#0
-        mov dl,#79
-        mov dh,#24
-        int  #0x10
-	call _setCursor
-	ret
-
-_setCursor:
-	mov ah, #2		;Set cursor position
-	mov bh, #0		;Page Number
-	mov dh, #3		;Row
-	mov dl, #0		;Column
-	int #0x10
-	mov ah, #0xB		;Set background/border Color
-	mov bh, #0		
-	mov bl, #0xC0   	;Set color
-	int #0x10
+	mov ax,#0xA000
+	mov es,ax
+	xor di,di
+	xor ax,ax
+	mov cx, #32000
+	cld
+	rep 
+	stosw
 	ret
 
 _moveCursor:
