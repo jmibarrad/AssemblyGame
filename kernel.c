@@ -21,7 +21,7 @@ void main(){
 	drawMaze(0xF);
 
 	gameStart(0x3);
-	clearScreen();
+	
 
 }
 
@@ -57,6 +57,22 @@ void gameStart(int color)
 				putPixel(i, j+1, 0x0);
 				i=132;
 				j=272;
+			}else if(pixel==2 || pixel2==2)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=32;
+				j=147;
+			}else if(pixel==0xc || pixel2==0xc)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=136;
+				j=100;
 			}
 			putPixel(i-1, j, 0x0);
 			putPixel(i-1, j+1, 0x0);
@@ -104,8 +120,8 @@ void gameStart(int color)
 		}else if(current == 'a'){
 			j--;
 			pixel = getPixel(i, j);
-			pixel2 = getPixel(i, j-1);
-			if(pixel == 15 || pixel ==15 || pixel == 14 || pixel2 == 14)
+			pixel2 = getPixel(i+1, j);
+			if(pixel == 15 || pixel2 ==15 || pixel == 14 || pixel2 == 14)
 				gameOver();
 			else if(pixel==7 && pixel2==7)
 			{
@@ -261,6 +277,7 @@ void drawMaze(int color){
 	drawFillRect(104, 200, width, 8, 0x2);
 	drawFillRect(104, 95, width, 8, 0x7);
 	drawFillRect(104, 230, width, 8, 0xD);
+	drawFillRect(200, 40,width, 9, 0xc);
 
 	//portal troll box
 	drawFillRect(123, 48, width-2, 20, color);
@@ -297,6 +314,15 @@ void drawMaze(int color){
 	drawFillRect(155, 190, 15, width, color);
 	drawFillRect(170, 160, 15, width, color);
 
+	drawFillRect(101, 154, 1, 7, 14);
+	drawFillRect(105, 157, 1, 7, 14);
+	drawFillRect(94, 154, 1, 7, 14);
+	drawFillRect(97, 157, 1, 7, 14);
+	drawFillRect(87, 154, 1, 7, 14);
+	drawFillRect(91, 157, 1, 7, 14);
+	drawFillRect(81, 154, 1, 7, 14);
+	drawFillRect(84, 157, 1, 7, 14);
+
 	drawFillRect(140, 260, width, 15, color);
 	drawFillRect(140, 274, 18, width, color);
 	drawFillRect(136, 235, 18, width, color);
@@ -306,6 +332,7 @@ void drawMaze(int color){
 
 	drawFillRect(170, 170, 1, 7, color);
 	drawFillRect(165, 175, 1, 7, color);
+	drawFillRect(115, 260, 10, width, 14);
 
 	//dots protecting end
 	drawFillRect(170, 270, 2, 2, color);
@@ -321,6 +348,7 @@ void drawMaze(int color){
 	drawFillRect(180, 262, 2, 2, color);
 
 	drawFillRect(179, 270, width, 8, 4); // End
+	drawFillRect(60, 252,width, 7, 0xc);
 	
 }
 
