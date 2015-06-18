@@ -275,14 +275,23 @@ void drawMaze(int color){
 	drawFillRect(140, 90, width, 130, color);
 	drawFillRect(155, 90, width, 100, color);
 	drawFillRect(170, 90, width, 70, color);
+	drawFillRect(140, 80, width, 8, color);
+	drawFillRect(155, 80, width, 8, color);
+	drawFillRect(145, 75, 10, width, color);
+	drawFillRect(160, 75, 10, width, color);
+	drawFillRect(170, 80, width, 8, color);
+	drawFillRect(175, 75, 9, width, color);
+	drawFillRect(125, 80, width, 8, color);
+	drawFillRect(130, 75, 10, width, color);
+	drawFillRect(184, 80, 1, 8, color);
 
 	drawFillRect(115, 90, 9, 1, color);
 	drawFillRect(130, 90, 10, width, color);
 	drawFillRect(130, 95, 10, width, 0xD);
 
 	drawFillRect(125, 260, 15, width, color);
-	drawFillRect(140, 220, 15, width, color);
-	drawFillRect(155, 190, 15, width, color);
+	drawFillRect(140, 220, 45, width, color);
+	drawFillRect(155, 190, 30, width, color);
 	drawFillRect(170, 160, 15, width, color);
 
 	drawFillRect(101, 154, 1, 7, 14);
@@ -293,8 +302,6 @@ void drawMaze(int color){
 	drawFillRect(91, 157, 1, 7, 14);
 	drawFillRect(81, 154, 1, 7, 14);
 	drawFillRect(84, 157, 1, 7, 14);
-	drawFillRect(109, 157, 5, 1, color);
-	drawFillRect(109, 161, 5, 1, color);
 
 	drawFillRect(140, 260, width, 15, color);
 	drawFillRect(140, 274, 18, width, color);
