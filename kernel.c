@@ -73,6 +73,14 @@ void gameStart(int color)
 				putPixel(i, j+1, 0x0);
 				i=136;
 				j=100;
+			}else if(pixel==12 || pixel2==12)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=32;
+				j=147;
 			}
 			putPixel(i-1, j, 0x0);
 			putPixel(i-1, j+1, 0x0);
@@ -91,6 +99,22 @@ void gameStart(int color)
 			{
 				i-=20;
 				j-=20;
+			}else if(pixel==0xc || pixel2==0xc)
+			{
+				putPixel(i+1, j, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i+2, j, 0x0);
+				putPixel(i+2, j+1, 0x0);
+				i=136;
+				j=100;
+			}else if(pixel==2 || pixel2==2)
+			{
+				putPixel(i+1, j, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i+2, j, 0x0);
+				putPixel(i+2, j+1, 0x0);
+				i=132;
+				j=272;
 			}
 			putPixel(i+2, j, 0x0);
 			putPixel(i+2, j+1, 0x0);
@@ -109,6 +133,14 @@ void gameStart(int color)
 			{
 				i+=15;
 				j+=20;
+			}else if(pixel==9 || pixel2==9)
+			{
+				putPixel(i, j-1, 0x0);
+				putPixel(i+1, j-1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i+1, j, 0x0);
+				i=32;
+				j=147;
 			}
 			putPixel(i, j-1, 0x0);
 			putPixel(i+1, j-1, 0x0);
@@ -127,6 +159,22 @@ void gameStart(int color)
 			{
 				i+=20;
 				j+=20;
+			}else if(pixel==0xd || pixel2==0xd)
+			{
+				putPixel(i, j+1, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i, j+2, 0x0);
+				putPixel(i+1, j+2, 0x0);
+				i=32;
+				j=147;
+			}else if(pixel==9 || pixel2==9)
+			{
+				putPixel(i, j+1, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i, j+2, 0x0);
+				putPixel(i+1, j+2, 0x0);
+				i=32;
+				j=147;
 			}
 			putPixel(i, j+2, 0x0);
 			putPixel(i+1, j+2, 0x0);
