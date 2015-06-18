@@ -75,7 +75,7 @@ void gameStart(int color)
 				gameOver();
 			else if(pixel==7 && pixel2==7)
 			{
-				i+=20;
+				i+=15;
 				j+=20;
 			}
 			putPixel(i, j-1, 0x0);
@@ -231,12 +231,22 @@ void drawMaze(int color){
 	drawFillRect(60, 200, width, 9, color);
 	drawFillRect(60, 217, width, 35, color);
 	
-	drawFillRect(123, 41, width, 229, color);
-	drawFillRect(135, 41, width, 238, color);
-
+	//portals
 	drawFillRect(104, 200, width, 8, 0x2);
 	drawFillRect(104, 95, width, 8, 0x7);
-	drawFillRect(104, 230, width, 8, 0x5);
+	drawFillRect(104, 230, width, 8, 0xD);
+
+	//portal troll box
+	drawFillRect(123, 46, width, 20, color);
+	drawFillRect(123, 66, 20, width, color);
+	drawFillRect(143, 46, width, 25, color);
+	drawFillRect(123, 46, 20, width, color);
+
+	drawFillRect(128, 53, 3, 11, 0x2);
+	drawFillRect(131, 63, 9, 3, 9);
+	drawFillRect(140, 53, 3, 11, 12);
+	drawFillRect(131, 51, 9, 3, 9);
+	
 	
 }
 
