@@ -33,10 +33,15 @@ void gameStart(int color)
 		current = readChar();
 		if(current== 's'){
 			i++;
-			pixel = getPixel(i, j+1);
+			pixel = getPixel(i+1, j);
 			pixel2 = getPixel(i+1, j+1);
-			if(pixel != 0x0 && pixel2 !=0x0)
+			if(pixel == 15 || pixel2 ==15)
 				gameOver();
+			else if(pixel==10 || pixel2==10)
+			{
+				i+=20;
+				j+=20;
+			}
 			putPixel(i-1, j, 0x0);
 			putPixel(i-1, j+1, 0x0);
 			
@@ -47,9 +52,14 @@ void gameStart(int color)
 		}else if(current == 'w'){
 			i--;
 			pixel = getPixel(i, j);
-			pixel2 = getPixel(i+1, j);
-			if(pixel != 0x0 && pixel2!=0x0)
+			pixel2 = getPixel(i, j+1);
+			if(pixel== 15 || pixel2==15)
 				gameOver();
+			else if(pixel==10 || pixel2==10)
+			{
+				i+=20;
+				j+=20;
+			}
 			putPixel(i+2, j, 0x0);
 			putPixel(i+2, j+1, 0x0);
 			
@@ -61,8 +71,13 @@ void gameStart(int color)
 			j++;
 			pixel = getPixel(i+1, j);
 			pixel2 = getPixel(i+1, j+1);
-			if(pixel != 0x0 && pixel2!=0x0)
+			if(pixel == 15 || pixel2==15)
 				gameOver();
+			else if(pixel==10 && pixel2==10)
+			{
+				i+=20;
+				j+=20;
+			}
 			putPixel(i, j-1, 0x0);
 			putPixel(i+1, j-1, 0x0);
 			
@@ -74,8 +89,13 @@ void gameStart(int color)
 			j--;
 			pixel = getPixel(i, j);
 			pixel2 = getPixel(i, j+1);
-			if(pixel != 0x0 && pixel !=0x0)
+			if(pixel == 15 || pixel ==15)
 				gameOver();
+			else if(pixel==10 && pixel2==10)
+			{
+				i+=20;
+				j+=20;
+			}
 			putPixel(i, j+2, 0x0);
 			putPixel(i+1, j+2, 0x0);
 			
@@ -204,7 +224,7 @@ void drawMaze(int color){
 	drawFillRect(50, 210, width, 11, color);
 	drawFillRect(60, 200, width, 9, color);
 	drawFillRect(60, 217, width, 35, color);
-	//drawFillRect(60, 217, width, 35, color);
+	drawFillRect(107, 94, 3, 10, 12); // portal
 }
 
 
