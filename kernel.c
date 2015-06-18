@@ -21,13 +21,13 @@ void main(){
 	drawMaze(0xF);
 
 	gameStart(0x3);
-	clearScreen();
+	
 
 }
 
 void gameStart(int color)
 {
-	int i = 32, j = 120, pixel = 0,pixel2=0;
+	int i = 32, j = 147, pixel = 0,pixel2=0;
 	char current = 0;
 	putPixel(i, j, color);
 	putPixel(i+1, j, color);
@@ -43,8 +43,44 @@ void gameStart(int color)
 				gameOver();
 			else if(pixel==7 || pixel2==7)
 			{
-				i+=20;
-				j+=20;
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=135;
+				j=57;
+			}else if(pixel==0xd || pixel2==0xd)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=132;
+				j=272;
+			}else if(pixel==2 || pixel2==2)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=32;
+				j=147;
+			}else if(pixel==0xc || pixel2==0xc)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=136;
+				j=100;
+			}else if(pixel==12 || pixel2==12)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=32;
+				j=147;
 			}
 			putPixel(i-1, j, 0x0);
 			putPixel(i-1, j+1, 0x0);
@@ -63,6 +99,22 @@ void gameStart(int color)
 			{
 				i-=20;
 				j-=20;
+			}else if(pixel==0xc || pixel2==0xc)
+			{
+				putPixel(i+1, j, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i+2, j, 0x0);
+				putPixel(i+2, j+1, 0x0);
+				i=136;
+				j=100;
+			}else if(pixel==2 || pixel2==2)
+			{
+				putPixel(i+1, j, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i+2, j, 0x0);
+				putPixel(i+2, j+1, 0x0);
+				i=132;
+				j=272;
 			}
 			putPixel(i+2, j, 0x0);
 			putPixel(i+2, j+1, 0x0);
@@ -81,6 +133,14 @@ void gameStart(int color)
 			{
 				i+=15;
 				j+=20;
+			}else if(pixel==9 || pixel2==9)
+			{
+				putPixel(i, j-1, 0x0);
+				putPixel(i+1, j-1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i+1, j, 0x0);
+				i=32;
+				j=147;
 			}
 			putPixel(i, j-1, 0x0);
 			putPixel(i+1, j-1, 0x0);
@@ -92,13 +152,29 @@ void gameStart(int color)
 		}else if(current == 'a'){
 			j--;
 			pixel = getPixel(i, j);
-			pixel2 = getPixel(i, j-1);
-			if(pixel == 15 || pixel ==15 || pixel == 14 || pixel2 == 14)
+			pixel2 = getPixel(i+1, j);
+			if(pixel == 15 || pixel2 ==15 || pixel == 14 || pixel2 == 14)
 				gameOver();
 			else if(pixel==7 && pixel2==7)
 			{
 				i+=20;
 				j+=20;
+			}else if(pixel==0xd || pixel2==0xd)
+			{
+				putPixel(i, j+1, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i, j+2, 0x0);
+				putPixel(i+1, j+2, 0x0);
+				i=32;
+				j=147;
+			}else if(pixel==9 || pixel2==9)
+			{
+				putPixel(i, j+1, 0x0);
+				putPixel(i+1, j+1, 0x0);
+				putPixel(i, j+2, 0x0);
+				putPixel(i+1, j+2, 0x0);
+				i=32;
+				j=147;
 			}
 			putPixel(i, j+2, 0x0);
 			putPixel(i+1, j+2, 0x0);
@@ -249,6 +325,7 @@ void drawMaze(int color){
 	drawFillRect(104, 200, width, 8, 0x2);
 	drawFillRect(104, 95, width, 8, 0x7);
 	drawFillRect(104, 230, width, 8, 0xD);
+	drawFillRect(200, 40,width, 9, 0xc);
 
 	//portal troll box
 	drawFillRect(123, 48, width-2, 20, color);
@@ -328,6 +405,7 @@ void drawMaze(int color){
 	drawFillRect(180, 262, 2, 2, color);
 
 	drawFillRect(179, 270, width, 8, 4); // End
+	drawFillRect(60, 252,width, 7, 0xc);
 	
 }
 
