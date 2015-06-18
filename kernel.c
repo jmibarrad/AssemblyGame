@@ -27,7 +27,7 @@ void main(){
 
 void gameStart(int color)
 {
-	int i = 32, j = 120, pixel = 0,pixel2=0;
+	int i = 32, j = 147, pixel = 0,pixel2=0;
 	char current = 0;
 	putPixel(i, j, color);
 	putPixel(i+1, j, color);
@@ -43,8 +43,20 @@ void gameStart(int color)
 				gameOver();
 			else if(pixel==7 || pixel2==7)
 			{
-				i+=20;
-				j+=20;
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=135;
+				j=57;
+			}else if(pixel==0xd || pixel2==0xd)
+			{
+				putPixel(i-1, j, 0x0);
+				putPixel(i-1, j+1, 0x0);
+				putPixel(i, j, 0x0);
+				putPixel(i, j+1, 0x0);
+				i=132;
+				j=272;
 			}
 			putPixel(i-1, j, 0x0);
 			putPixel(i-1, j+1, 0x0);
