@@ -37,7 +37,7 @@ void gameStart(int color)
 			pixel2 = getPixel(i+1, j+1);
 			if(pixel == 15 || pixel2 ==15)
 				gameOver();
-			else if(pixel==10 || pixel2==10)
+			else if(pixel==7 || pixel2==7)
 			{
 				i+=20;
 				j+=20;
@@ -55,10 +55,10 @@ void gameStart(int color)
 			pixel2 = getPixel(i, j+1);
 			if(pixel== 15 || pixel2==15)
 				gameOver();
-			else if(pixel==10 || pixel2==10)
+			else if(pixel==7 || pixel2==7)
 			{
-				i+=20;
-				j+=20;
+				i-=20;
+				j-=20;
 			}
 			putPixel(i+2, j, 0x0);
 			putPixel(i+2, j+1, 0x0);
@@ -73,7 +73,7 @@ void gameStart(int color)
 			pixel2 = getPixel(i+1, j+1);
 			if(pixel == 15 || pixel2==15)
 				gameOver();
-			else if(pixel==10 && pixel2==10)
+			else if(pixel==7 && pixel2==7)
 			{
 				i+=20;
 				j+=20;
@@ -88,10 +88,10 @@ void gameStart(int color)
 		}else if(current == 'a'){
 			j--;
 			pixel = getPixel(i, j);
-			pixel2 = getPixel(i, j+1);
+			pixel2 = getPixel(i, j-1);
 			if(pixel == 15 || pixel ==15)
 				gameOver();
-			else if(pixel==10 && pixel2==10)
+			else if(pixel==7 && pixel2==7)
 			{
 				i+=20;
 				j+=20;
@@ -205,7 +205,13 @@ void drawMaze(int color){
 	drawFillRect(39, 90, width, 27, color);
 	drawFillRect(44, 112, 30, width, color);
 	drawFillRect(28, 145, 3, width, 0xA); //Start
-	drawFillRect(28, 150, 30, width, color);
+	drawFillRect(34, 155, width, 9, color);
+	drawFillRect(54, 155, width, 9, color);
+	drawFillRect(44, 162, width, 9, color);
+	drawFillRect(59, 175, width, 9, color);
+	drawFillRect(34, 183, 30, width, color);
+
+	drawFillRect(28, 150, 36, width, color);
 	drawFillRect(50, 140, width, 15, color);
 	drawFillRect(50, 117, width, 16, color);
 	drawFillRect(35, 170, 20, width, color);
@@ -224,7 +230,14 @@ void drawMaze(int color){
 	drawFillRect(50, 210, width, 11, color);
 	drawFillRect(60, 200, width, 9, color);
 	drawFillRect(60, 217, width, 35, color);
-	drawFillRect(107, 94, 3, 10, 12); // portal
+	
+	drawFillRect(123, 41, width, 229, color);
+	drawFillRect(135, 41, width, 238, color);
+
+	drawFillRect(104, 200, width, 8, 0x2);
+	drawFillRect(104, 95, width, 8, 0x7);
+	drawFillRect(104, 230, width, 8, 0x5);
+	
 }
 
 
